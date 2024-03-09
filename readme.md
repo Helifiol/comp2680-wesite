@@ -1,4 +1,4 @@
-### News Sync
+# News Sync
 
 ## The Main project folder is Web-applicaion
 ## The Test folder is for testing new components
