@@ -15,8 +15,14 @@ window.onscroll = function() {
 };
 
 async function getNews(topic){
-    const apiURL = `https://newsdata.io/api/1/news?apikey=pub_38926fa30fc9d8584a88993e02d121f9786a9&q=${topic}&language=en`;
-
+    let apiURL;
+    if(topic == null){
+        apiURL = "https://newsdata.io/api/1/news?apikey=pub_38926fa30fc9d8584a88993e02d121f9786a9&language=en"
+    }else{
+        apiURL = `https://newsdata.io/api/1/news?apikey=pub_38926fa30fc9d8584a88993e02d121f9786a9&q=${topic}&language=en`;
+    }
+    
+    console.log(topic);
     const response = await fetch(apiURL);
     if(!response.ok){
         throw new Error("Could not fetch data");
@@ -42,6 +48,7 @@ async function getNews(topic){
 
 function displayInfo(data){
     container.innerHTML = "" 
+    document.getElementById("ticker-taper").style.display = 'block'
     data.results.forEach(element => {
         console.log(element);
         const articleDiv = document.createElement('div');
@@ -64,17 +71,27 @@ function displayInfo(data){
         const countryElement = document.createElement('p')
         countryElement.textContent = element.country;
 
+        const imgContainerDiv = document.createElement("div")
+        imgContainerDiv.classList.add("imgContainer")
+
         const imgElement = document.createElement('img');
         imgElement.src = element.image_url;
 
-        articleDiv.appendChild(titleElement)
-        articleDiv.appendChild(imgElement)
-        articleDiv.appendChild(descriptionElement)
-        articleDiv.appendChild(readMoreElement)
-        articleDiv.appendChild(pubDateElement)
-        articleDiv.appendChild(countryElement)
-
+        articleDiv.appendChild(titleElement);
+        articleDiv.appendChild(imgContainerDiv);
+        imgContainerDiv.appendChild(imgElement);
+        articleDiv.appendChild(descriptionElement);
+        articleDiv.appendChild(readMoreElement);
+        articleDiv.appendChild(pubDateElement);
+        articleDiv.appendChild(countryElement);
         container.appendChild(articleDiv);
+        // articleDiv.appendChild(titleElement)
+        // articleDiv.appendChild(imgElement)
+        // articleDiv.appendChild(descriptionElement)
+        // articleDiv.appendChild(readMoreElement)
+        // articleDiv.appendChild(pubDateElement)
+        // articleDiv.appendChild(countryElement)
+        // container.appendChild(articleDiv);
     });
     document.getElementById("loading").style.display = 'none';
 }
@@ -134,7 +151,7 @@ animationStyle.animationDuration = `${scrollDuration}s`;
 
 
 async function main(){
-    const init_data = await getNews('topnews')
+    const init_data = await getNews(null)
     display_initial(init_data)
     // displayTickerTape(init_data)
     let searchInput = document.getElementById("search_input")
@@ -145,6 +162,7 @@ async function main(){
             let searchItem = searchInput.value;
             // document.getElementById("about").style.display = "none";
             document.getElementById("content").innerHTML=""
+            document.getElementById("ticker-taper").style.display = 'none'
             document.getElementById("loading").style.display = 'block';
             const data = await getNews(searchItem)
             displayInfo(data) 
@@ -158,6 +176,7 @@ async function main(){
             // Clear existing content and display loading indicator
             container.innerHTML = "";
             document.getElementById("loading").style.display = 'block';
+            document.getElementById("ticker-taper").style.display = 'none'
             const data = await getNews(searchItem);
             console.log('Fetched data:', data); // Debugging
             displayInfo(data);
