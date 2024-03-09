@@ -1,4 +1,5 @@
 # News Sync
+![img](/Web-application/icons/icon.png)
 
 ## The Main project folder is Web-applicaion
 ## The Test folder is for testing new components
