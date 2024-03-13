@@ -18,6 +18,9 @@ body {
     .header a{
         color: #222;
     }
+    .loader-img{
+        --c:#000000; 
+    }
 }
 .header{
     text-align: center;
@@ -196,6 +199,22 @@ body {
     }
 }
 
-
-
-
+/* loader img loading animation */
+.loader-img {
+    position: relative;
+    top: 40%;
+    left: 30%;
+    --c:#ffffff;
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    color: #0000;
+    overflow: hidden;
+    text-shadow: 0 0 var(--c),11ch 0 var(--c);
+    animation: l6 2s infinite linear;
+  }
+  .loader-img:before {
+    content:"Loading..."
+  }
+  @keyframes l6 {to{text-shadow:-11ch 0 var(--c),0ch 0 var(--c)}}

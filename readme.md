@@ -13,4 +13,5 @@
 - [ ] Sub page creation
 - [x] Dark mode
 - [ ] remove repeating articles or create language feature
-- [ ] remove unloaded img articles
+- [x] remove unloaded img articles
+- [x] max character length 150

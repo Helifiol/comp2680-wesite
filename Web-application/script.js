@@ -42,6 +42,11 @@ function darkmode(){
         img.src = "icons/light.svg"
     }
 }
+
+function truncate(str) {
+    return str.split(" ").splice(0,100).join(" ");
+}
+
 function displayTickerTape(data){
     console.log('displaying');
     let listElement = document.getElementById("ticker-taper");
@@ -56,7 +61,9 @@ function displayTickerTape(data){
 
 function displayInfo(data){
     container.innerHTML = "" 
+    displayTickerTape(data)
     document.getElementById("ticker-taper").style.display = 'block'
+    
     data.results.forEach(element => {
         console.log(element);
         const articleDiv = document.createElement('div');
@@ -66,7 +73,9 @@ function displayInfo(data){
         titleElement.textContent = element.title
 
         const descriptionElement = document.createElement('p');
-        descriptionElement.textContent = element.description
+        // console.log(typeof(element.description));
+        // descriptionElement.textContent = element.description
+        descriptionElement.textContent = truncate(element.description)
 
         const readMoreElement = document.createElement('a');
         readMoreElement.textContent = 'Read More';
@@ -82,26 +91,36 @@ function displayInfo(data){
         const imgContainerDiv = document.createElement("div")
         imgContainerDiv.classList.add("imgContainer")
 
+        const imgloadingAnimationDiv = document.createElement("div");
+        imgloadingAnimationDiv.classList.add("loader-img");
+        imgloadingAnimationDiv.id = "loadingAnimation";
+
         const imgElement = document.createElement('img');
+        imgElement.id = "Image"; 
         imgElement.src = element.image_url;
+        imgElement.style.display = "none";
+        if(element.image_url){
+            imgElement.onload = function() {
+                imgElement.style.display = "block";
+                imgloadingAnimationDiv.style.display = "none";
+            }
+        }else{
+            imgloadingAnimationDiv.style.display = "block"
+        }
 
         articleDiv.appendChild(titleElement);
         articleDiv.appendChild(imgContainerDiv);
         imgContainerDiv.appendChild(imgElement);
+        imgContainerDiv.appendChild(imgloadingAnimationDiv) 
         articleDiv.appendChild(descriptionElement);
         articleDiv.appendChild(readMoreElement);
         articleDiv.appendChild(pubDateElement);
         articleDiv.appendChild(countryElement);
         container.appendChild(articleDiv);
-        // articleDiv.appendChild(titleElement)
-        // articleDiv.appendChild(imgElement)
-        // articleDiv.appendChild(descriptionElement)
-        // articleDiv.appendChild(readMoreElement)
-        // articleDiv.appendChild(pubDateElement)
-        // articleDiv.appendChild(countryElement)
-        // container.appendChild(articleDiv);
+        
     });
     document.getElementById("loading").style.display = 'none';
+    ticker_ainmation()
 }
 
 function display_initial(data){
@@ -114,7 +133,8 @@ function display_initial(data){
         titleElement.textContent = element.title
 
         const descriptionElement = document.createElement('p');
-        descriptionElement.textContent = element.description
+        descriptionElement.textContent = truncate(element.description)
+        // descriptionElement.textContent = element.description
 
         const readMoreElement = document.createElement('a');
         readMoreElement.textContent = 'Read More';
@@ -130,37 +150,59 @@ function display_initial(data){
         const imgContainerDiv = document.createElement("div")
         imgContainerDiv.classList.add("imgContainer")
 
+        const imgloadingAnimationDiv = document.createElement("div");
+        imgloadingAnimationDiv.classList.add("loader-img");
+        imgloadingAnimationDiv.id = "loadingAnimation";
+        
         const imgElement = document.createElement('img');
+        imgElement.id = "Image";
         imgElement.src = element.image_url;
+        imgElement.style.display = "none";
+        if(element.image_url){
+            imgElement.onload = function() {
+                imgElement.style.display = "block";
+                imgloadingAnimationDiv.style.display = "none";
+            }
+        }else{
+            imgloadingAnimationDiv.style.display = "block"
+        }
+        
 
         articleDiv.appendChild(titleElement)
         articleDiv.appendChild(imgContainerDiv)
         imgContainerDiv.appendChild(imgElement)
+        imgContainerDiv.appendChild(imgloadingAnimationDiv)
         articleDiv.appendChild(descriptionElement)
         articleDiv.appendChild(readMoreElement)
         articleDiv.appendChild(pubDateElement)
         articleDiv.appendChild(countryElement)
         container.appendChild(articleDiv);
     }); 
+    // document.getElementById("loading").style.display = 'block';
+}
+// ticker taper animation
+function ticker_ainmation(){
+    let tickerList = document.querySelector('.ticker-items');
+
+    let totalWidth = 0;
+    tickerList.querySelectorAll('li').forEach(item => {
+      totalWidth += item.offsetWidth;
+    });
+    
+    let scrollDuration = totalWidth / 50;
+    
+    let animationStyle = document.querySelector('.ticker-items').style;
+    animationStyle.animationDuration = `${scrollDuration}s`;
+    animationStyle.animationIterationCount = "infinite";
 }
 
-
-const tickerList = document.querySelector('.ticker-items');
-
-let totalWidth = 0;
-tickerList.querySelectorAll('li').forEach(item => {
-  totalWidth += item.offsetWidth;
-});
-
-const scrollDuration = totalWidth / 50;
-
-const animationStyle = document.querySelector('.ticker-items').style;
-animationStyle.animationDuration = `${scrollDuration}s`;
-animationStyle.animationIterationCount = "infinite";
+ticker_ainmation()
 
 
 async function main(){
+    document.getElementById("loading").style.display = 'block'; 
     const init_data = await getNews(null);
+    document.getElementById("loading").style.display = 'none'; 
     displayTickerTape(init_data);
     display_initial(init_data);
     // displayTickerTape(init_data)
@@ -176,7 +218,7 @@ async function main(){
             document.getElementById("loading").style.display = 'block';
             const data = await getNews(searchItem)
             displayInfo(data) 
-            displayTickerTape(data)
+            // displayTickerTape(data)
         }
     })
 
@@ -191,7 +233,7 @@ async function main(){
             const data = await getNews(searchItem);
             console.log('Fetched data:', data); // Debugging
             displayInfo(data);
-            displayTickerTape(data);
+            // displayTickerTape(data);
         } catch (error) {
             console.error('Error fetching and displaying data:', error);
             // Handle errors gracefully, e.g., display an error message to the user
