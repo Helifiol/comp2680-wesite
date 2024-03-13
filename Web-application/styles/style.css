@@ -1,0 +1,185 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(39, 38, 38);
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
+.header {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    position: static;
+    z-index: 2;
+}
+.nav {
+    background-color: #333;
+    overflow: hidden;
+    padding: 5px 0;
+    width: 100%;
+    top: 0;
+    transition: top 0.3s;
+    z-index: 1; 
+}
+.sticky {
+    position: fixed; 
+    top: 0;
+}
+.nav a {
+    margin-left: 140px;
+    padding: 18px 16px;
+    float: left;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+}
+.nav a:hover {
+    background-color: #555;
+}
+.search-container {
+    float: right;
+    padding: 5px;
+}
+.search-container input[type="text"], .search-container button {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+    background: white;
+    color: black;
+}
+.search-container button {
+    background: #ddd;
+    cursor: pointer;
+}
+.search-container button:hover {
+    background: #ccc;
+}
+.search-container img {
+    height: 16px; 
+    width: 16px;
+}
+
+.content {
+    display: grid;
+    
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 0 60px;
+    margin-top: 80px; 
+}
+.section {
+    background-color: #333;
+    padding: 50px;
+    border-radius: 8px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.about {
+    display: none;
+    background-color: #222;
+    color: white;
+    margin: 60px;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* .article img {
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+    height: auto; 
+} */
+
+.imgContainer {
+    width: 700px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.imgContainer img{
+    width: 100%;
+    height: auto;
+}
+/* .article{
+    border: 1px solid white;
+} */
+
+.article h2 {
+    color: white; /* Title color */
+    margin-bottom: 10px; /* Space under the title */
+}
+
+.article p, .article a {
+    color: #ddd; /* Lighter text color for content and links */
+}
+
+.article a {
+    display: inline-block; /* Make the 'Read More' links inline-block */
+    margin-top: 10px; /* Space above the 'Read More' link */
+    text-decoration: underline; /* Underline the 'Read More' link */
+}
+
+
+ /* Loading Animation */
+.loader {
+    width: 250px;
+    position: relative;
+    top: 330px;
+    left: 760px;
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    clip-path: inset(0 3ch 0 0);
+    animation: l4 1s steps(4) infinite;
+  }
+.loader:before {
+    content:"Loading..."
+  }
+@keyframes l4 {to{clip-path: inset(0 -1ch 0 0)}}
+  
+  
+
+.loader{
+    display: none;
+}
+
+/* Tiker taper annimation */
+
+.ticker-container {
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background-color: #4c4c4f;
+}
+
+.ticker-items {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    animation: scroll 10s linear infinite;
+}
+
+.ticker-items li {
+    white-space: nowrap;
+    margin-right: 20px;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-700%);
+    }
+}
+
+
+
+
