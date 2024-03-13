@@ -8,11 +8,9 @@
 ### Todo
 
 - [x] Add animation to background
-- [ ] Tickertape real data
-- [ ] Tickertape infinite loop
+- [x] Tickertape real data
+- [x] Tickertape infinite loop
 - [ ] Sub page creation
-- [ ] Dark mode
+- [x] Dark mode
 - [ ] remove repeating articles or create language feature
 - [ ] remove unloaded img articles
-
-tes

@@ -29,22 +29,30 @@ async function getNews(topic){
     }
     return await response.json();
 }
-
-// function displayTickerTape(data){
-//     data.results.forEach(element =>{
-//         const tickerContainerDiv = document.createElement("div")
-//         tickerContainerDiv.classList.add("ticker-container")
-
-//         const uListDiv = document.createElement("ul")
-//         uListDiv.className("ticker-items")
-
-//         const listitemelement =document.createElement("li")
-//         listitemelement.textContent = element.title;
-
-//         tickerContainerDiv.appendChild(uListDiv)
-//         uListDiv.appendChild(listitemelement)
-//     })
-// }
+var darkMode = false;
+function darkmode(){
+    var element = document.body;
+    var img = document.getElementById("theme-img");
+    element.classList.toggle("dark-mode");
+    
+    darkMode = !darkMode;
+    if(darkMode){
+        img.src = "icons/dark.png";
+    }else{
+        img.src = "icons/light.svg"
+    }
+}
+function displayTickerTape(data){
+    console.log('displaying');
+    let listElement = document.getElementById("ticker-taper");
+    listElement.innerHTML="";
+    data.results.forEach(element =>{
+        const item = document.createElement("li");
+        item.textContent = element.title;
+        listElement.appendChild(item)
+    }) 
+    console.log('done');
+}
 
 function displayInfo(data){
     container.innerHTML = "" 
@@ -148,11 +156,13 @@ const scrollDuration = totalWidth / 50;
 
 const animationStyle = document.querySelector('.ticker-items').style;
 animationStyle.animationDuration = `${scrollDuration}s`;
+animationStyle.animationIterationCount = "infinite";
 
 
 async function main(){
-    const init_data = await getNews(null)
-    display_initial(init_data)
+    const init_data = await getNews(null);
+    displayTickerTape(init_data);
+    display_initial(init_data);
     // displayTickerTape(init_data)
     let searchInput = document.getElementById("search_input")
     let search_button = document.getElementById("search_button")
@@ -166,6 +176,7 @@ async function main(){
             document.getElementById("loading").style.display = 'block';
             const data = await getNews(searchItem)
             displayInfo(data) 
+            displayTickerTape(data)
         }
     })
 
@@ -180,6 +191,7 @@ async function main(){
             const data = await getNews(searchItem);
             console.log('Fetched data:', data); // Debugging
             displayInfo(data);
+            displayTickerTape(data);
         } catch (error) {
             console.error('Error fetching and displaying data:', error);
             // Handle errors gracefully, e.g., display an error message to the user
