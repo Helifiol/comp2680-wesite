@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: rgb(39, 38, 38);
+    background-color: #212121;
+    /* background: radial-gradient(rgb(5, 5, 5), rgb(86, 84, 84)); */
     color: white;
     margin: 0;
     padding: 0;
@@ -33,7 +34,7 @@ body {
     text-decoration: none;
 }
 .nav {
-    background-color: #333;
+    background: radial-gradient(rgb(61, 60, 60), rgb(30, 26, 26));
     overflow: hidden;
     padding: 5px 0;
     width: 100%;

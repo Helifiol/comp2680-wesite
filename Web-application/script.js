@@ -44,7 +44,11 @@ function darkmode(){
 }
 
 function truncate(str) {
-    return str.split(" ").splice(0,100).join(" ");
+    if(str != null){
+        return str.split(" ").splice(0,100).join(" ");
+    }else{
+        return "No Data Found"
+    }
 }
 
 function displayTickerTape(data){
@@ -97,9 +101,10 @@ function displayInfo(data){
 
         const imgElement = document.createElement('img');
         imgElement.id = "Image"; 
-        imgElement.src = element.image_url;
+        // imgElement.src = element.image_url;
         imgElement.style.display = "none";
         if(element.image_url){
+            imgElement.src = element.image_url;
             imgElement.onload = function() {
                 imgElement.style.display = "block";
                 imgloadingAnimationDiv.style.display = "none";
@@ -201,7 +206,7 @@ ticker_ainmation()
 
 async function main(){
     document.getElementById("loading").style.display = 'block'; 
-    const init_data = await getNews(null);
+    const init_data = await getNews('null');
     document.getElementById("loading").style.display = 'none'; 
     displayTickerTape(init_data);
     display_initial(init_data);
@@ -225,22 +230,35 @@ async function main(){
     search_button.addEventListener("click", async function(){
         try {
             let searchItem = searchInput.value;
-            console.log('Search term:', searchItem); // Debugging
-            // Clear existing content and display loading indicator
+            console.log('Search term:', searchItem); 
             container.innerHTML = "";
             document.getElementById("loading").style.display = 'block';
             document.getElementById("ticker-taper").style.display = 'none'
             const data = await getNews(searchItem);
-            console.log('Fetched data:', data); // Debugging
+            console.log('Fetched data:', data); 
             displayInfo(data);
-            // displayTickerTape(data);
         } catch (error) {
             console.error('Error fetching and displaying data:', error);
-            // Handle errors gracefully, e.g., display an error message to the user
         }
     });
-    
-
+    addEventListener("click", async function(event){
+        if(event.target.classList.contains("headings")){
+            event.preventDefault();
+            console.log(event);
+            try {
+                let searchItem = event.target.textContent;
+                container.innerHTML = "";
+                document.getElementById("loading").style.display = 'block';
+                document.getElementById("ticker-taper").style.display = 'none'
+                const data = await getNews(searchItem);
+                console.log('Fetched data:', data); 
+                displayInfo(data);
+            } catch (error) {
+                console.error('Error fetching and displaying data:', error);
+            } 
+        }
+        
+   }) 
     // const data = await getNews('tesla')
     // displayInfo(data)
 }

@@ -10,8 +10,9 @@
 - [x] Add animation to background
 - [x] Tickertape real data
 - [x] Tickertape infinite loop
-- [ ] Sub page creation
+- [x] Sub page creation
 - [x] Dark mode
 - [ ] remove repeating articles or create language feature
 - [x] remove unloaded img articles
 - [x] max character length 150
+- [ ] create about page
