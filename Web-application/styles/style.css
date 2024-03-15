@@ -130,7 +130,7 @@ body {
 /* Adjusting the .imgContainer to ensure it does not cause overflow */
 .imgContainer {
     width: 100%; /* Adjust the width to prevent overflow */
-    height: auto; /* Make height automatic to maintain aspect ratio */
+    height: 400px; /* Make height automatic to maintain aspect ratio */
     overflow: hidden;
 }
 

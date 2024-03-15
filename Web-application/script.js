@@ -56,7 +56,7 @@ function displayTickerTape(data){
     let listElement = document.getElementById("ticker-taper");
     listElement.innerHTML="";
     data.results.forEach(element =>{
-        const item = document.createElement("li");
+        var item = document.createElement("li");
         item.textContent = element.title;
         listElement.appendChild(item)
     }) 
@@ -64,124 +64,131 @@ function displayTickerTape(data){
 }
 
 function displayInfo(data){
+    let articles = []
     container.innerHTML = "" 
-    displayTickerTape(data)
+    // displayTickerTape(data)
     document.getElementById("ticker-taper").style.display = 'block'
     
     data.results.forEach(element => {
-        console.log(element);
-        const articleDiv = document.createElement('div');
-        articleDiv.classList.add('article');
+        if(!articles.includes(element.title)){
+            console.log(element);
+            const articleDiv = document.createElement('div');
+            articleDiv.classList.add('article');
 
-        const titleElement = document.createElement("h2");
-        titleElement.textContent = element.title
+            const titleElement = document.createElement("h2");
+            titleElement.textContent = element.title
 
-        const descriptionElement = document.createElement('p');
-        // console.log(typeof(element.description));
-        // descriptionElement.textContent = element.description
-        descriptionElement.textContent = truncate(element.description)
+            const descriptionElement = document.createElement('p');
+            // console.log(typeof(element.description));
+            // descriptionElement.textContent = element.description
+            descriptionElement.textContent = truncate(element.description)
 
-        const readMoreElement = document.createElement('a');
-        readMoreElement.textContent = 'Read More';
-        readMoreElement.href = element.link;
-        readMoreElement.target = '_blank';
+            const readMoreElement = document.createElement('a');
+            readMoreElement.textContent = 'Read More';
+            readMoreElement.href = element.link;
+            readMoreElement.target = '_blank';
 
-        const pubDateElement = document.createElement('p');
-        pubDateElement.textContent = element.pubDate;
+            const pubDateElement = document.createElement('p');
+            pubDateElement.textContent = element.pubDate;
 
-        const countryElement = document.createElement('p')
-        countryElement.textContent = element.country;
+            const countryElement = document.createElement('p')
+            countryElement.textContent = element.country;
 
-        const imgContainerDiv = document.createElement("div")
-        imgContainerDiv.classList.add("imgContainer")
+            const imgContainerDiv = document.createElement("div")
+            imgContainerDiv.classList.add("imgContainer")
 
-        const imgloadingAnimationDiv = document.createElement("div");
-        imgloadingAnimationDiv.classList.add("loader-img");
-        imgloadingAnimationDiv.id = "loadingAnimation";
+            const imgloadingAnimationDiv = document.createElement("div");
+            imgloadingAnimationDiv.classList.add("loader-img");
+            imgloadingAnimationDiv.id = "loadingAnimation";
 
-        const imgElement = document.createElement('img');
-        imgElement.id = "Image"; 
-        // imgElement.src = element.image_url;
-        imgElement.style.display = "none";
-        if(element.image_url){
-            imgElement.src = element.image_url;
-            imgElement.onload = function() {
-                imgElement.style.display = "block";
-                imgloadingAnimationDiv.style.display = "none";
+            const imgElement = document.createElement('img');
+            imgElement.id = "Image"; 
+            // imgElement.src = element.image_url;
+            imgElement.style.display = "none";
+            if(element.image_url){
+                imgElement.src = element.image_url;
+                imgElement.onload = function() {
+                    imgElement.style.display = "block";
+                    imgloadingAnimationDiv.style.display = "none";
+                }
+            }else{
+                imgloadingAnimationDiv.style.display = "block"
             }
-        }else{
-            imgloadingAnimationDiv.style.display = "block"
-        }
 
-        articleDiv.appendChild(titleElement);
-        articleDiv.appendChild(imgContainerDiv);
-        imgContainerDiv.appendChild(imgElement);
-        imgContainerDiv.appendChild(imgloadingAnimationDiv) 
-        articleDiv.appendChild(descriptionElement);
-        articleDiv.appendChild(readMoreElement);
-        articleDiv.appendChild(pubDateElement);
-        articleDiv.appendChild(countryElement);
-        container.appendChild(articleDiv);
-        
+            articleDiv.appendChild(titleElement);
+            articleDiv.appendChild(imgContainerDiv);
+            imgContainerDiv.appendChild(imgElement);
+            imgContainerDiv.appendChild(imgloadingAnimationDiv) 
+            articleDiv.appendChild(descriptionElement);
+            articleDiv.appendChild(readMoreElement);
+            articleDiv.appendChild(pubDateElement);
+            articleDiv.appendChild(countryElement);
+            container.appendChild(articleDiv);
+        }
     });
     document.getElementById("loading").style.display = 'none';
     ticker_ainmation()
 }
 
 function display_initial(data){
+    let articles = [];
     data.results.forEach(element => {
         console.log(element);
-        const articleDiv = document.createElement('div');
-        articleDiv.classList.add('article');
+        if(!articles.includes(element.title)){
+            articles.push(element.title);
+            const articleDiv = document.createElement('div');
+            articleDiv.classList.add('article');
 
-        const titleElement = document.createElement("h2");
-        titleElement.textContent = element.title
+            const titleElement = document.createElement("h2");
+            titleElement.textContent = element.title
 
-        const descriptionElement = document.createElement('p');
-        descriptionElement.textContent = truncate(element.description)
-        // descriptionElement.textContent = element.description
+            const descriptionElement = document.createElement('p');
+            descriptionElement.textContent = truncate(element.description)
+            // descriptionElement.textContent = element.description
 
-        const readMoreElement = document.createElement('a');
-        readMoreElement.textContent = 'Read More';
-        readMoreElement.href = element.link;
-        readMoreElement.target = '_blank';
+            const readMoreElement = document.createElement('a');
+            readMoreElement.textContent = 'Read More';
+            readMoreElement.href = element.link;
+            readMoreElement.target = '_blank';
 
-        const pubDateElement = document.createElement('p');
-        pubDateElement.textContent = element.pubDate;
+            const pubDateElement = document.createElement('p');
+            pubDateElement.textContent = element.pubDate;
 
-        const countryElement = document.createElement('p')
-        countryElement.textContent = element.country;
+            const countryElement = document.createElement('p')
+            countryElement.textContent = element.country;
 
-        const imgContainerDiv = document.createElement("div")
-        imgContainerDiv.classList.add("imgContainer")
+            const imgContainerDiv = document.createElement("div")
+            imgContainerDiv.classList.add("imgContainer")
 
-        const imgloadingAnimationDiv = document.createElement("div");
-        imgloadingAnimationDiv.classList.add("loader-img");
-        imgloadingAnimationDiv.id = "loadingAnimation";
-        
-        const imgElement = document.createElement('img');
-        imgElement.id = "Image";
-        imgElement.src = element.image_url;
-        imgElement.style.display = "none";
-        if(element.image_url){
-            imgElement.onload = function() {
-                imgElement.style.display = "block";
-                imgloadingAnimationDiv.style.display = "none";
+            const imgloadingAnimationDiv = document.createElement("div");
+            imgloadingAnimationDiv.classList.add("loader-img");
+            imgloadingAnimationDiv.id = "loadingAnimation";
+            
+            const imgElement = document.createElement('img');
+            imgElement.id = "Image";
+            imgElement.src = element.image_url;
+            imgElement.style.display = "none";
+            if(element.image_url){
+                imgElement.onload = function() {
+                    imgElement.style.display = "block";
+                    imgloadingAnimationDiv.style.display = "none";
+                }
+            }else{
+                imgloadingAnimationDiv.style.display = "block"
             }
-        }else{
-            imgloadingAnimationDiv.style.display = "block"
+            
+
+            articleDiv.appendChild(titleElement)
+            articleDiv.appendChild(imgContainerDiv)
+            imgContainerDiv.appendChild(imgElement)
+            imgContainerDiv.appendChild(imgloadingAnimationDiv)
+            articleDiv.appendChild(descriptionElement)
+            articleDiv.appendChild(readMoreElement)
+            articleDiv.appendChild(pubDateElement)
+            articleDiv.appendChild(countryElement)
+            container.appendChild(articleDiv);
         }
         
-
-        articleDiv.appendChild(titleElement)
-        articleDiv.appendChild(imgContainerDiv)
-        imgContainerDiv.appendChild(imgElement)
-        imgContainerDiv.appendChild(imgloadingAnimationDiv)
-        articleDiv.appendChild(descriptionElement)
-        articleDiv.appendChild(readMoreElement)
-        articleDiv.appendChild(pubDateElement)
-        articleDiv.appendChild(countryElement)
-        container.appendChild(articleDiv);
     }); 
     // document.getElementById("loading").style.display = 'block';
 }
