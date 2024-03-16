@@ -193,18 +193,33 @@ body {
     background-color: #4c4c4f;
 }
 
+/* .ticker-items { */
+    /* display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0; */
+    /* Set to 70 seconds for a slower animation */
+    /* animation: scroll 60s linear infinite; */
+/* } */
+
 .ticker-items {
+    font-family: Arial, sans-serif;
+    color: white;
+    font-size: 18px;
+    box-sizing: inherit;
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    /* Set to 70 seconds for a slower animation */
     animation: scroll 60s linear infinite;
+    animation-duration: 132.08s;
+    animation-iteration-count: infinite;
 }
 
 .ticker-items li {
     white-space: nowrap;
     margin-right: 20px;
+    flex-shrink: 0;
 }
 
 @keyframes scroll {

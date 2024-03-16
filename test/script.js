@@ -42,21 +42,7 @@ function darkmode(){
         img.src = "icons/light.svg"
     }
 }
-// function displayTickerTape(data){
-//     data.results.forEach(element =>{
-//         const tickerContainerDiv = document.createElement("div")
-//         tickerContainerDiv.classList.add("ticker-container")
 
-//         const uListDiv = document.createElement("ul")
-//         uListDiv.className("ticker-items")
-
-//         const listitemelement =document.createElement("li")
-//         listitemelement.textContent = element.title;
-
-//         tickerContainerDiv.appendChild(uListDiv)
-//         uListDiv.appendChild(listitemelement)
-//     })
-// }
 
 function displayInfo(data){
     container.innerHTML = "" 
@@ -163,6 +149,28 @@ animationStyle.animationDuration = `${scrollDuration}s`;
 
 
 async function main(){
+    // async function displayTickerTape(data) {
+    //     const tickerContainer = document.querySelector('.ticker-items');
+    //     tickerContainer.innerHTML = ""; // Clear previous ticker items
+        
+    //     data.results.forEach(element => {
+    //         const listItem = document.createElement('li');
+    //         listItem.textContent = element.title;
+    //         tickerContainer.appendChild(listItem);
+    //     });
+        
+    //     // Adjust animation duration based on total width of ticker items
+    //     let totalWidth = 0;
+    //     tickerContainer.querySelectorAll('li').forEach(item => {
+    //         totalWidth += item.offsetWidth;
+    //     });
+    //     const scrollDuration = totalWidth / 50; // Adjust the divisor as needed for desired speed
+        
+    //     // Set animation duration
+    //     const animationStyle = tickerContainer.style;
+    //     animationStyle.animationDuration = `${scrollDuration}s`;
+    // }
+    
     const init_data = await getNews(null)
     display_initial(init_data)
     // displayTickerTape(init_data)
@@ -178,6 +186,7 @@ async function main(){
             document.getElementById("loading").style.display = 'block';
             const data = await getNews(searchItem)
             displayInfo(data) 
+            // displayTickerTape(data)
         }
     })
 

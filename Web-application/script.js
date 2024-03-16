@@ -61,14 +61,16 @@ function displayTickerTape(data){
         listElement.appendChild(item)
     }) 
     console.log('done');
+    ticker_ainmation()
 }
 
 function displayInfo(data){
     let articles = []
     container.innerHTML = "" 
     // displayTickerTape(data)
-    document.getElementById("ticker-taper").style.display = 'block'
-    
+    document.getElementById("ticker-taper").style.display = 'none';
+    document.querySelector(".ticker-container").style.display = 'none';
+
     data.results.forEach(element => {
         if(!articles.includes(element.title)){
             console.log(element);
@@ -127,7 +129,7 @@ function displayInfo(data){
         }
     });
     document.getElementById("loading").style.display = 'none';
-    ticker_ainmation()
+    // ticker_ainmation()
 }
 
 function display_initial(data){
@@ -208,7 +210,7 @@ function ticker_ainmation(){
     animationStyle.animationIterationCount = "infinite";
 }
 
-ticker_ainmation()
+
 
 
 async function main(){
