@@ -1,7 +1,7 @@
 /*COMMIT*/
 body {
     font-family: Arial, sans-serif;
-    background-color: black;
+    background-color: rgb(29, 29, 29);
     color: white;
     margin: 0;
     padding: 0;
@@ -250,3 +250,13 @@ body {
     content:"Loading..."
   }
   @keyframes l6 {to{text-shadow:-11ch 0 var(--c),0ch 0 var(--c)}}
+
+
+.stocks{
+    display: none;
+    /* background: #FFFFFF; */
+    padding: 10px; 
+    border: none;
+    border-radius: 5px;
+    /* box-shadow:0 2px 4px 0 rgba(0,0,0,.2) */
+}

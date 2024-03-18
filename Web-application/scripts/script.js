@@ -1,8 +1,12 @@
 const container = document.getElementById("content")
 
-var header = document.getElementById("header");
-var nav = document.getElementById("nav");    
-var sticky = header.offsetTop + header.offsetHeight;
+try{
+    var header = document.getElementById("header");
+    var nav = document.getElementById("nav");    
+    var sticky = header.offsetTop + header.offsetHeight;
+}catch(error){
+    console.log(error);
+}
 function stickyNav() {
     if (window.pageYOffset > sticky) {
         nav.classList.add("sticky");
@@ -211,51 +215,82 @@ function ticker_ainmation(){
 }
 
 
+//about iframe async load
+
+function loadIframeAsync(url, containerId) {
+    var iframe = document.createElement('iframe');
+    
+    iframe.src = url;
+
+    iframe.width = "100%";
+    iframe.height = "600";
+
+    var container = document.getElementById(containerId);
+    container.appendChild(iframe);
+}
+
 
 
 async function main(){
-    document.getElementById("loading").style.display = 'block'; 
-    const init_data = await getNews('null');
-    document.getElementById("loading").style.display = 'none'; 
-    displayTickerTape(init_data);
-    display_initial(init_data);
-    // displayTickerTape(init_data)
-    let searchInput = document.getElementById("search_input")
-    let search_button = document.getElementById("search_button")
 
-    searchInput.addEventListener('keypress', async function(event){
-        if(event.key == 'Enter'){
-            let searchItem = searchInput.value;
-            // document.getElementById("about").style.display = "none";
-            document.getElementById("content").innerHTML=""
-            document.getElementById("ticker-taper").style.display = 'none'
-            document.getElementById("loading").style.display = 'block';
-            const data = await getNews(searchItem)
-            displayInfo(data) 
-            // displayTickerTape(data)
+    try{
+        var searchInput = document.getElementById("searchinput");
+        var resultsDiv = document.getElementById('results');
+        function updateResults() {
+            resultsDiv.textContent = input.value;
         }
-    })
+        searchInput.addEventListener('keypress',async function(event){
+            if(event.key === 'Enter'){
+                let searchstock = searchstock.value;
+                window.onload = function() {
+                    console.log(searchstock);
+                    loadIframeAsync(`https://jika.io/embed/area-chart?symbol=${searchstock}&selection=one_month&closeKey=close&boxShadow=true&graphColor=1652f0&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Nunito`, 'results');
+                };
+            }
+        }) 
+    }catch(error){
+        console.log(error);
+    }
+    
+    !function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://weatherwidget.io/js/widget.min.js';
+            
+            // js.style.display = 'none';
+            
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'weatherwidget-io-js');    
+    try{
+        document.getElementById("loading").style.display = 'block'; 
+        const init_data = await getNews('null');
+        document.getElementById("loading").style.display = 'none'; 
+        displayTickerTape(init_data);
+        display_initial(init_data);
+        // displayTickerTape(init_data)
+        let searchInput = document.getElementById("search_input")
+        let search_button = document.getElementById("search_button")
 
-    search_button.addEventListener("click", async function(){
-        try {
-            let searchItem = searchInput.value;
-            console.log('Search term:', searchItem); 
-            container.innerHTML = "";
-            document.getElementById("loading").style.display = 'block';
-            document.getElementById("ticker-taper").style.display = 'none'
-            const data = await getNews(searchItem);
-            console.log('Fetched data:', data); 
-            displayInfo(data);
-        } catch (error) {
-            console.error('Error fetching and displaying data:', error);
-        }
-    });
-    addEventListener("click", async function(event){
-        if(event.target.classList.contains("headings")){
-            event.preventDefault();
-            console.log(event);
+        searchInput.addEventListener('keypress', async function(event){
+            if(event.key == 'Enter'){
+                let searchItem = searchInput.value;
+                // document.getElementById("about").style.display = "none";
+                document.getElementById("content").innerHTML=""
+                document.getElementById("ticker-taper").style.display = 'none'
+                document.getElementById("loading").style.display = 'block';
+                const data = await getNews(searchItem)
+                displayInfo(data) 
+                // displayTickerTape(data)
+            }
+        })
+
+        search_button.addEventListener("click", async function(){
             try {
-                let searchItem = event.target.textContent;
+                let searchItem = searchInput.value;
+                console.log('Search term:', searchItem); 
                 container.innerHTML = "";
                 document.getElementById("loading").style.display = 'block';
                 document.getElementById("ticker-taper").style.display = 'none'
@@ -264,12 +299,31 @@ async function main(){
                 displayInfo(data);
             } catch (error) {
                 console.error('Error fetching and displaying data:', error);
-            } 
-        }
-        
-   }) 
-    // const data = await getNews('tesla')
-    // displayInfo(data)
+            }
+        });
+        addEventListener("click", async function(event){
+            if(event.target.classList.contains("headings")){
+                event.preventDefault();
+                console.log(event);
+                try {
+                    let searchItem = event.target.textContent;
+                    container.innerHTML = "";
+                    document.getElementById("loading").style.display = 'block';
+                    document.getElementById("ticker-taper").style.display = 'none'
+                    const data = await getNews(searchItem);
+                    console.log('Fetched data:', data); 
+                    displayInfo(data);
+                } catch (error) {
+                    console.error('Error fetching and displaying data:', error);
+                } 
+            }
+            
+        }) 
+    }catch(error){
+        console.log(error);
+    }
+
+    
 }
 
 main()
