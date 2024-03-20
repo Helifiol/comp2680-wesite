@@ -1,0 +1,262 @@
+/*COMMIT*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(0,3,6);
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit; /* Inherit box-sizing from body */
+}
+
+.dark-mode{
+    background-color: white;    
+    .article h2 {
+        color: black; /* Title color */
+    }
+    .article p, .article a {
+        color: black; /* Lighter text color for content and links */
+    }
+    .header a{
+        color: white;
+    }
+    .loader-img{
+        --c:#000000; 
+    }
+}
+
+/* Specific overrides for elements within the dark mode */
+.dark-mode .header,
+.dark-mode .nav,
+.dark-mode .ticker-container {
+    background-color: black; /* Keeping the bars the same as before */
+    color: white; /* Sets the text color within these elements to white */
+}
+
+.header {
+    text-align: center;
+    font-size: 40px;
+    position: static;
+    z-index: 2;
+}
+
+.header a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.nav {
+    background: radial-gradient(rgb(61, 60, 60), rgb(30, 26, 26));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px; /* Adjusted padding for smaller nav height */
+    width: 100%;
+    top: 0;
+    transition: top 0.3s;
+    z-index: 1;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%; /* Ensures sticky nav is full width */
+}
+
+.nav a {
+    padding: 10px 16px; /* Adjusted padding to decrease nav item height */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    flex: 1; /* Distributes space evenly */
+    margin: 0 5px; /* Adjust margin as needed */
+}
+
+.nav a:hover {
+    background-color: #555;
+}
+
+.search-container {
+    padding: 5px;
+    flex: 2; /* Adjust the flex value as needed to fit the search container */
+}
+
+.search-container input[type="text"], .search-container button {
+    padding: 6px;
+    margin: 0; /* Align with other nav items */
+    font-size: 17px;
+    border: none;
+    background: white;
+    color: black;
+}
+
+.search-container button {
+    background: #ddd;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background: #ccc;
+}
+
+.search-container img {
+    height: 16px; 
+    width: 16px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 0 60px; /* Ensure the padding does not cause overflow */
+    margin-top: 80px; 
+}
+
+.section {
+    background-color: #333;
+    padding: 50px;
+    border-radius: 8px;
+    height: 200px;
+    overflow: hidden;
+}
+
+/* Adjusting the .imgContainer to ensure it does not cause overflow */
+.imgContainer {
+    width: 100%; /* Adjust the width to prevent overflow */
+    height: 400px; /* Make height automatic to maintain aspect ratio */
+    overflow: hidden;
+}
+
+.imgContainer img {
+    width: 100%;
+    height: auto;
+}
+/* .article{
+    border: 1px solid white;
+} */
+
+.article h2 {
+    color: white; /* Title color */
+    margin-bottom: 10px; /* Space under the title */
+}
+
+.article p, .article a {
+    color: #ddd; /* Lighter text color for content and links */
+}
+
+.article a {
+    display: inline-block; /* Make the 'Read More' links inline-block */
+    margin-top: 10px; /* Space above the 'Read More' link */
+    text-decoration: underline; /* Underline the 'Read More' link */
+}
+
+
+ /* Loading Animation */
+.loader {
+    width: 250px;
+    position: relative;
+    top: 330px;
+    left: 760px;
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    clip-path: inset(0 3ch 0 0);
+    animation: l4 1s steps(4) infinite;
+  }
+.loader:before {
+    content:"Loading..."
+  }
+@keyframes l4 {to{clip-path: inset(0 -1ch 0 0)}}
+  
+  
+
+.loader{
+    display: none;
+}
+
+/* Tiker taper annimation */
+
+.ticker-container {
+    width: 100%;
+    height: 50px; /* You can adjust the height as needed */
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* Vertically centers the content */
+    background-color: #4c4c4f;
+}
+
+/* .ticker-items { */
+    /* display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0; */
+    /* Set to 70 seconds for a slower animation */
+    /* animation: scroll 60s linear infinite; */
+/* } */
+
+.ticker-items {
+    font-family: Arial, sans-serif;
+    color: white;
+    font-size: 18px;
+    box-sizing: inherit;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    animation: scroll 60s linear infinite;
+    animation-duration: 132.08s;
+    animation-iteration-count: infinite;
+}
+
+.ticker-items li {
+    white-space: nowrap;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+/* loader img loading animation */
+.loader-img {
+    position: relative;
+    top: 40%;
+    left: 30%;
+    --c:#ffffff;
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    color: #0000;
+    overflow: hidden;
+    text-shadow: 0 0 var(--c),11ch 0 var(--c);
+    animation: l6 2s infinite linear;
+  }
+  .loader-img:before {
+    content:"Loading..."
+  }
+  @keyframes l6 {to{text-shadow:-11ch 0 var(--c),0ch 0 var(--c)}}
+
+
+.stocks{
+    display: none;
+    /* background: #FFFFFF; */
+    padding: 10px; 
+    border: none;
+    border-radius: 5px;
+    /* box-shadow:0 2px 4px 0 rgba(0,0,0,.2) */
+}
