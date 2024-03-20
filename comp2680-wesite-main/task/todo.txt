@@ -1,0 +1,8 @@
+write a js script which calls a file (eg: s_muks_nl.txt) when a user clicks 
+on a story link then it open a story page and display the content on the text file.
+
+Note:
+    the program must work on any link the user clicks and load the specific file for the story
+
+use a basic html template to structure your code
+css will be done later
