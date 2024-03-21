@@ -1,10 +1,17 @@
 const container = document.getElementById("content")
 //footer hidden 
-var footers = document.getElementsByTagName("footer");
-for (var i = 0; i < footers.length; i++) {
-    footers[i].style.display = "none";
-}
 
+function footervisiblity(value){
+    var footers = document.getElementsByTagName("footer");
+    for (var i = 0; i < footers.length; i++) {
+        if(value){
+            footers[i].style.display = "block";
+        }else{
+            footers[i].style.display = "none";
+        }
+    }
+}
+footervisiblity(false);
 
 try{
     var header = document.getElementById("header");
@@ -83,6 +90,7 @@ function displayTickerTape(data){
 
 //display search / headline stories
 function displayInfo(data){
+    footervisiblity(false)
     let articles = []
     container.innerHTML = "" 
     // displayTickerTape(data)
@@ -165,10 +173,12 @@ function displayInfo(data){
     });
     document.getElementById("loading").style.display = 'none';
     // ticker_ainmation()
+    footervisiblity(true);
 }
 
 //display stories when when in home page
 function display_initial(data){
+    footervisiblity(false)
     let articles = [];
     data.results.forEach(element => {
         console.log(element);
@@ -246,6 +256,7 @@ function display_initial(data){
         }
         
     }); 
+    footervisiblity(true)
     // document.getElementById("loading").style.display = 'block';
 }
 
@@ -366,17 +377,15 @@ async function main(){
                     displayInfo(data);
                 } catch (error) {
                     console.error('Error fetching and displaying data:', error);
+                    footervisiblity(false);
                 } 
             }
             
         }) 
     }catch(error){
+        footervisiblity(false)
         console.log(error);
-    }
-    //display footer after loading stories
-    var footers = document.getElementsByTagName("footer");
-    for (var i = 0; i < footers.length; i++) {
-        footers[i].style.display = "block";
+        
     }
 
     // last modified
@@ -385,4 +394,5 @@ async function main(){
 }
 document.addEventListener("DOMContentLoaded", function() {
     main();
+    footervisiblity(false)
 });
