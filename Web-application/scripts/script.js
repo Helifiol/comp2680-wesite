@@ -1,4 +1,10 @@
 const container = document.getElementById("content")
+//footer hidden 
+var footers = document.getElementsByTagName("footer");
+for (var i = 0; i < footers.length; i++) {
+    footers[i].style.display = "none";
+}
+
 
 try{
     var header = document.getElementById("header");
@@ -7,17 +13,19 @@ try{
 }catch(error){
     console.log(error);
 }
-function stickyNav() {
-    if (window.pageYOffset > sticky) {
-        nav.classList.add("sticky");
-    } else {
-        nav.classList.remove("sticky");
-    }
-}
-window.onscroll = function() {
-    stickyNav();
-};
+// function stickyNav() {
+//     if (window.pageYOffset > sticky) {
+//         nav.classList.add("sticky");
+//     } else {
+//         nav.classList.remove("sticky");
+//     }
+// }
+// window.onscroll = function() {
+//     stickyNav();
+// };
 
+
+//fetch news stories object from API
 async function getNews(topic){
     let apiURL;
     if(topic == null){
@@ -31,8 +39,11 @@ async function getNews(topic){
     if(!response.ok){
         throw new Error("Could not fetch data");
     }
+    // console.log(response.json());
     return await response.json();
 }
+
+//dark mode 
 var darkMode = false;
 function darkmode(){
     var element = document.body;
@@ -47,6 +58,7 @@ function darkmode(){
     }
 }
 
+//reduce size of the paragraph and send `not found` if data not present 
 function truncate(str) {
     if(str != null){
         return str.split(" ").splice(0,100).join(" ");
@@ -55,6 +67,7 @@ function truncate(str) {
     }
 }
 
+//append news data to ticker tape
 function displayTickerTape(data){
     console.log('displaying');
     let listElement = document.getElementById("ticker-taper");
@@ -68,6 +81,7 @@ function displayTickerTape(data){
     ticker_ainmation()
 }
 
+//display search / headline stories
 function displayInfo(data){
     let articles = []
     container.innerHTML = "" 
@@ -89,16 +103,32 @@ function displayInfo(data){
             // descriptionElement.textContent = element.description
             descriptionElement.textContent = truncate(element.description)
 
+            const byline = document.createElement('p');
+            const by = "Published by:";
+            let name = "unknown";
+            try{
+                if(element.creator[0] == null){
+                    name = "Unknown";
+                }else{
+                    name = element.creator[0];
+                }
+            }catch(error){
+                console.log(error);
+            }
+            byline.textContent = by.concat(' ', name);
+
             const readMoreElement = document.createElement('a');
             readMoreElement.textContent = 'Read More';
             readMoreElement.href = element.link;
             readMoreElement.target = '_blank';
 
             const pubDateElement = document.createElement('p');
-            pubDateElement.textContent = element.pubDate;
+            const pubdate = "Published Date:";
+            pubDateElement.textContent = pubdate.concat(" ", element.pubDate);
 
             const countryElement = document.createElement('p')
-            countryElement.textContent = element.country;
+            const country = "Country:";
+            countryElement.textContent = country.concat(" ", element.country);
 
             const imgContainerDiv = document.createElement("div")
             imgContainerDiv.classList.add("imgContainer")
@@ -126,6 +156,7 @@ function displayInfo(data){
             imgContainerDiv.appendChild(imgElement);
             imgContainerDiv.appendChild(imgloadingAnimationDiv) 
             articleDiv.appendChild(descriptionElement);
+            articleDiv.appendChild(byline);
             articleDiv.appendChild(readMoreElement);
             articleDiv.appendChild(pubDateElement);
             articleDiv.appendChild(countryElement);
@@ -136,6 +167,7 @@ function displayInfo(data){
     // ticker_ainmation()
 }
 
+//display stories when when in home page
 function display_initial(data){
     let articles = [];
     data.results.forEach(element => {
@@ -152,16 +184,33 @@ function display_initial(data){
             descriptionElement.textContent = truncate(element.description)
             // descriptionElement.textContent = element.description
 
+            const byline = document.createElement('p');
+            const by = "Published by:";
+            let name = "unknown";
+            try{
+                if(element.creator[0] == null){
+                    name = "Unknown";
+                }else{
+                    name = element.creator[0];
+                }
+            }catch(error){
+                console.log(error);
+            }
+            byline.textContent = by.concat(' ', name);
+
             const readMoreElement = document.createElement('a');
             readMoreElement.textContent = 'Read More';
             readMoreElement.href = element.link;
             readMoreElement.target = '_blank';
 
             const pubDateElement = document.createElement('p');
-            pubDateElement.textContent = element.pubDate;
+            const pubdate = "Published Date:";
+            pubDateElement.textContent = pubdate.concat(" ", element.pubDate);
+            // pubDateElement.textContent = element.pubDate;
 
             const countryElement = document.createElement('p')
-            countryElement.textContent = element.country;
+            const country = "Country:";
+            countryElement.textContent = country.concat(" ", element.country);
 
             const imgContainerDiv = document.createElement("div")
             imgContainerDiv.classList.add("imgContainer")
@@ -189,6 +238,7 @@ function display_initial(data){
             imgContainerDiv.appendChild(imgElement)
             imgContainerDiv.appendChild(imgloadingAnimationDiv)
             articleDiv.appendChild(descriptionElement)
+            articleDiv.appendChild(byline);
             articleDiv.appendChild(readMoreElement)
             articleDiv.appendChild(pubDateElement)
             articleDiv.appendChild(countryElement)
@@ -198,6 +248,7 @@ function display_initial(data){
     }); 
     // document.getElementById("loading").style.display = 'block';
 }
+
 // ticker taper animation
 function ticker_ainmation(){
     let tickerList = document.querySelector('.ticker-items');
@@ -241,7 +292,7 @@ async function main(){
         }
         searchInput.addEventListener('keypress',async function(event){
             if(event.key === 'Enter'){
-                let searchstock = searchstock.value;
+                let searchstock = searchInput.value;
                 window.onload = function() {
                     console.log(searchstock);
                     loadIframeAsync(`https://jika.io/embed/area-chart?symbol=${searchstock}&selection=one_month&closeKey=close&boxShadow=true&graphColor=1652f0&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Nunito`, 'results');
@@ -322,8 +373,16 @@ async function main(){
     }catch(error){
         console.log(error);
     }
+    //display footer after loading stories
+    var footers = document.getElementsByTagName("footer");
+    for (var i = 0; i < footers.length; i++) {
+        footers[i].style.display = "block";
+    }
 
-    
+    // last modified
+    document.getElementById("last-refreshed").innerHTML = "Last Modified: " + document.lastModified;
+
 }
-
-main()
+document.addEventListener("DOMContentLoaded", function() {
+    main();
+});

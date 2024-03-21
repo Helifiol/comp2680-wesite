@@ -19,6 +19,7 @@
         <a href="#" class="headings">Politics</a>
         <a href="#" class="headings">Weather</a>
         <a href="#" class="headings">Sports</a>
+        <!-- <a href="#" class=""></a> -->
         <!-- <a href="#" class="stock"> Stocks</a> -->
         <a href="stocks.html"> Stocks</a>
         <button onclick="darkmode()">
@@ -50,9 +51,26 @@
 
     <a class="weatherwidget-io" href="https://forecast7.com/en/50d67n120d33/kamloops/" data-label_1="KAMLOOPS" data-label_2="WEATHER" data-theme="weather_one" style="display: none;">KAMLOOPS WEATHER</a>
     <div class="content" id="content"></div>
-    <div class="stocks" id="stocks">    
-    </div>
 
+    <!-- space between stories and footer -->
+    <div class="push"></div>
+
+    <footer class="footer">
+        <div class="waves">
+          <div class="wave" id="wave1"></div>
+          <div class="wave" id="wave2"></div>
+          <div class="wave" id="wave3"></div>
+          <div class="wave" id="wave4"></div>
+        </div>
+        <ul class="menu">
+          <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+          <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+          <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+          <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+    
+        </ul>
+        <p id="last-refreshed"></p>
+      </footer>
 
     <script src="scripts/script.js"></script>
 </body>
