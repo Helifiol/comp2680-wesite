@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: 'Exo', sans-serif;
+    /* overflow: hidden ; */
+}
+
+
+.context {
+    width: 100%;
+    position: absolute;
+    top:25vh;
+    
+}
+
+.context h1{
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+
+
+.area{
+    /* background: #4e54c8;   */
+    background: #2b2b2b;
+    /* background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);   */
+    width: 100%;
+    height:100vh;
+    
+   
+}
+
+.circles{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.circles li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    
+}
+
+.circles li:nth-child(1){
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+
+.circles li:nth-child(2){
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.circles li:nth-child(3){
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.circles li:nth-child(4){
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.circles li:nth-child(5){
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(6){
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+}
+
+.circles li:nth-child(7){
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.circles li:nth-child(8){
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.circles li:nth-child(9){
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+}
+
+.circles li:nth-child(10){
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+
+
+@keyframes animate {
+
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+
+}
+
+.company-info {
+    background: #C3C9DD;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  
+.company-info h3,
+.company-info ul {
+    text-align: center;
+    margin: 0 0 1rem 0;
+  }
+ 
+  /* ------- */
+  /* CONTACT */
+  /* ------- */
+.notice{
+  position: absolute;
+  bottom: 20px;
+  font-size: 14px;
+}
+
+.contact {
+    background: #dcdfea;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+  
+  /* ---- */
+  /* FORM */
+  /* ---- */
+  
+  .contact form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  
+  .contact form label {
+    display: block;
+  }
+  
+  .contact form p {
+    margin: 0;
+  }
+  
+  .contact form .full {
+    grid-column: 1 / 3;
+  }
+  
+  .contact form button,
+  .contact form input,
+  .contact form textarea {
+    width: 100%;
+    padding: 1em;
+    border: solid 1px #3c3f47;
+    border-radius: 4px;
+  }
+  
+  .contact form textarea {
+    resize: none;
+  }
+  
+  .contact form button {
+    background: #3c3f47;
+    border: 0;
+    color: #e4e4e4;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .contact form button:hover,
+  .contact form button:focus {
+    background: #3952a3;
+    color: #ffffff;
+    outline: 0;
+    transition: background-color 2s ease-out;
+  }
+  
+  /* ------------- */
+  /* MEDIA QUERIES */
+  /* ------------- */
+  
+  @media only screen and (min-width: 700px) {
+    .wrapper {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+  
+    .wrapper > * {
+      padding: 2em;
+    }
+  
+    .company-info {
+      border-radius: 4px 0 0 4px;
+    }
+  
+    .contact {
+      border-radius: 0 4px 4px 0;
+    }
+  
+    .company-info h3,
+    .company-info ul,
+    .brand {
+      text-align: left;
+    }
+  }
+
+.container {
+max-width: 1170px;
+margin-left: auto;
+margin-right: auto;
+padding: 1em;
+}
+
+ul {
+list-style: none;
+padding: 0;
+}
+
+.brand {
+text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.brand span {
+color: #ffffff;
+}
+
+.wrapper {
+box-shadow: 0 0 20px 0 rgba(48, 48, 50, 0.7);
+}
+
+.wrapper > * {
+padding: 1em;
+}

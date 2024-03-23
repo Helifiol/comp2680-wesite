@@ -12,7 +12,9 @@
 - [x] Tickertape infinite loop
 - [x] Sub page creation
 - [x] Dark mode
-- [ ] remove repeating articles or create language feature
+- [x] remove repeating articles or create language feature
 - [x] remove unloaded img articles
 - [x] max character length 150
 - [ ] create about page
+- [x] team page
+- [x] contact page 
