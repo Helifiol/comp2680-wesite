@@ -4,7 +4,11 @@
 }
 body {
     overflow: hidden;
-    background: #181818;;   
+    background: #181818;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 100;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 
