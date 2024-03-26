@@ -9,22 +9,22 @@ body {
     margin: 0;
     padding: 0;
     font-size: 18px;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box; 
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit; /* Inherit box-sizing from body */
+    box-sizing: inherit;
 }
 
 .dark-mode{
     background-color: white;    
     .article h2 {
-        color: black; /* Title color */
+        color: black; 
     }
     .article p, .article a {
-        color: black; /* Lighter text color for content and links */
+        color: black; 
     }
     .header a{
         color: white;
@@ -34,12 +34,11 @@ body {
     }
 }
 
-/* Specific overrides for elements within the dark mode */
 .dark-mode .header,
 .dark-mode .nav,
 .dark-mode .ticker-container {
-    background-color: black; /* Keeping the bars the same as before */
-    color: white; /* Sets the text color within these elements to white */
+    background-color: black; 
+    color: white;
 }
 
 .header {   
@@ -60,7 +59,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px; /* Adjusted padding for smaller nav height */
+    padding: 5px 10px;
     width: 100%;
     top: 0;
     transition: top 0.3s;
@@ -70,17 +69,17 @@ body {
 .sticky {
     position: fixed;
     top: 0;
-    width: 100%; /* Ensures sticky nav is full width */
+    width: 100%;
 }
 
 .nav a {
-    padding: 10px 16px; /* Adjusted padding to decrease nav item height */
+    padding: 10px 16px; 
     color: white;
     text-align: center;
     text-decoration: none;
     font-size: 17px;
-    flex: 1; /* Distributes space evenly */
-    margin: 0 5px; /* Adjust margin as needed */
+    flex: 1; 
+    margin: 0 5px; 
 }
 
 .nav a:hover {
@@ -89,12 +88,12 @@ body {
 
 .search-container {
     padding: 5px;
-    flex: 2; /* Adjust the flex value as needed to fit the search container */
+    flex: 2; 
 }
 
 .search-container input[type="text"], .search-container button {
     padding: 6px;
-    margin: 0; /* Align with other nav items */
+    margin: 0;
     font-size: 17px;
     border: none;
     background: white;
@@ -119,7 +118,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
-    padding: 0 60px; /* Ensure the padding does not cause overflow */
+    padding: 0 60px;
     margin-top: 80px; 
 }
 
@@ -131,10 +130,9 @@ body {
     overflow: hidden;
 }
 
-/* Adjusting the .imgContainer to ensure it does not cause overflow */
 .imgContainer {
-    width: 100%; /* Adjust the width to prevent overflow */
-    height: 400px; /* Make height automatic to maintain aspect ratio */
+    width: 100%; 
+    height: 400px;
     overflow: hidden;
 }
 
@@ -142,23 +140,20 @@ body {
     width: 100%;
     height: auto;
 }
-/* .article{
-    border: 1px solid white;
-} */
 
 .article h2 {
-    color: white; /* Title color */
-    margin-bottom: 10px; /* Space under the title */
+    color: white; 
+    margin-bottom: 10px; 
 }
 
 .article p, .article a {
-    color: #ddd; /* Lighter text color for content and links */
+    color: #ddd;
 }
 
 .article a {
-    display: inline-block; /* Make the 'Read More' links inline-block */
-    margin-top: 10px; /* Space above the 'Read More' link */
-    text-decoration: underline; /* Underline the 'Read More' link */
+    display: inline-block; 
+    margin-top: 10px; 
+    text-decoration: underline;
 }
 
 
@@ -193,21 +188,13 @@ body {
     font-weight: 700;
     font-style: normal;
     width: 100%;
-    height: 50px; /* You can adjust the height as needed */
+    height: 50px; 
     overflow: hidden;
     display: flex;
-    align-items: center; /* Vertically centers the content */
+    align-items: center; 
     background-color: #4c4c4f;
 }
 
-/* .ticker-items { */
-    /* display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0; */
-    /* Set to 70 seconds for a slower animation */
-    /* animation: scroll 60s linear infinite; */
-/* } */
 
 .ticker-items {
     color: white;
@@ -260,11 +247,9 @@ body {
 
 .stocks{
     display: none;
-    /* background: #FFFFFF; */
     padding: 10px; 
     border: none;
     border-radius: 5px;
-    /* box-shadow:0 2px 4px 0 rgba(0,0,0,.2) */
 }
 
 
